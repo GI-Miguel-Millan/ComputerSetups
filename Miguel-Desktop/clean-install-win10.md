@@ -42,7 +42,7 @@
  
  ## Daily Use Programs
 
-Japanese / Media Related:
+- Japanese / Media Related:
 
     - SRS program: [Anki](https://apps.ankiweb.net/)
 	    - Copy over anki data / addons
@@ -63,20 +63,20 @@ Japanese / Media Related:
 		- [VLC](https://www.videolan.org/vlc/)
 	- Mass File Renaming: *FileBot* - Download from the microsoft store if you own it.
 	
-Gaming related:
+- Gaming related:
 
     - [Steam](https://store.steampowered.com/)
 	    - Beatsaber mapping: [MediocreMapper2](https://bsmg.wiki/mapping/mediocre-map-assistant.html)
 		- Beatsaber mods: [ModAssistant](https://github.com/Assistant/ModAssistant#Usage)
 	- [Battle.net](https://www.blizzard.com/en-us/apps/battle.net/desktop)
 
-Other / MISC:
+- Other / MISC:
 
 	- Text & Voice Chat App: [Discord](https://discord.com/)
 	- Mouse Software: [Logitech G Hub](https://www.logitechg.com/en-us/innovation/g-hub.html)
 	
 	
-## Potentially Worth Downloading
+## Download as the need arises
 
 - Audio Editor: [Audacity](https://www.audacityteam.org/)
 - Slicer program for 3D printing: [ChiTuBox](https://www.chitubox.com/en/download/chitubox-free)
