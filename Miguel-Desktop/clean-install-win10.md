@@ -14,7 +14,7 @@
 ## Important / Immediately after Install
 
 1. Kill any unnecessary processes and remove any bloatware that came with the fresh install.
-2. Perform a benchmark test using Windows built in Performance Monditor.
+2. Perform a benchmark test using Windows built in Performance Monitor.
     1. Press the *Windows Key + R* and type "perfom /report"
     2. Save this report for future reference
 3. Map network drives to access any backup data (if backing up to a NAS).
@@ -43,6 +43,7 @@
  ## Daily Use Programs
 
 Japanese / Media Related:
+
     - SRS program: [Anki](https://apps.ankiweb.net/)
 	    - Copy over anki data / addons
 		- At the very least, we want Anki Connect.
@@ -63,12 +64,14 @@ Japanese / Media Related:
 	- Mass File Renaming: *FileBot* - Download from the microsoft store if you own it.
 	
 Gaming related:
+
     - [Steam](https://store.steampowered.com/)
 	    - Beatsaber mapping: [MediocreMapper2](https://bsmg.wiki/mapping/mediocre-map-assistant.html)
 		- Beatsaber mods: [ModAssistant](https://github.com/Assistant/ModAssistant#Usage)
 	- [Battle.net](https://www.blizzard.com/en-us/apps/battle.net/desktop)
 
 Other / MISC:
+
 	- Text & Voice Chat App: [Discord](https://discord.com/)
 	- Mouse Software: [Logitech G Hub](https://www.logitechg.com/en-us/innovation/g-hub.html)
 	
@@ -86,18 +89,6 @@ Other / MISC:
     - Setup [Windows Subsystem for Linux (wsl)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 	- or, get [MobaXterm](https://mobaxterm.mobatek.net/download.html) home edition.
 
-## Old/Unnecessary Programs
-
-- Ark Server: arkServerManager
-- modeling software: Blender.net
-- media remux software: ffmpeg-win-2.2.2 
-- MKV editor: MKVToolNix 
-- alternate web browser: Opera
-- game launcher: Origin Games 
-- game launcher: Riot Games 
-- desktop epwing dictionary viewer: qolibri_2.2.2_win32
-	- Just use yomi-chan, you can get the most important dictionaries anyway.
-	
 ## After Installing and configuring programs
 
 - Clean up startup programs (remove anything but the essential).
@@ -114,3 +105,16 @@ Other / MISC:
 
 - If you install / run a japanese game that uses SoftDenchi DRM, use [this](https://pastebin.com/wKJuWdVL) python script to remove the watchdog software.
     - This DRM watchdog is similar to a malware in that it runs even when the game is not running. If you've legally obtained the game, there should be nothing wrong with removing this waste of resources.
+
+## Old/Unnecessary Programs
+
+- Ark Server: arkServerManager
+- modeling software: Blender.net
+- media remux software: ffmpeg-win-2.2.2 
+- MKV editor: MKVToolNix 
+- alternate web browser: Opera
+- game launcher: Origin Games 
+- game launcher: Riot Games 
+- desktop epwing dictionary viewer: qolibri_2.2.2_win32
+	- Just use yomi-chan, you can get the most important dictionaries anyway.
+	
