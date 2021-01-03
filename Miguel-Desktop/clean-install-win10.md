@@ -3,8 +3,8 @@
 ## Before Re-install
 
 1. Backup any save data that is not stored in the Cloud.
-    - Darksouls 1, 3, and remaster saves are all stored in Documents, which is now backed up in One Drive, so not as concerned.
-    - Particularly: Magicite, Darksouls 2, Warcraft3, Warcraft2, StarCraft, or any other game/config that doesn't save to the Cloud or connected NAS.
+    - Darksouls 1 and remaster saves are all stored in Documents, which is now backed up in One Drive, so not as concerned.
+    - Particularly: Magicite, Darksouls 2+3, Warcraft3, Warcraft2, StarCraft, or any other game/config that doesn't save to the Cloud or connected NAS.
 	    - If you mod skyrim using Nexus Mod Manager, backup the program folder where this data is stored.
     - If you don't have a full backup of users, make sure to at least grab config data from AppData for programs with a more involved setup (i.e. Anki)
 	    - At the very least, save Anki data + addons.
@@ -26,7 +26,6 @@
 	- Graphic drivers: [Geforce Experience](https://www.nvidia.com/en-us/geforce/geforce-experience/)
     - Remote Desktop: [Teamviewer](https://www.teamviewer.com/en/teamviewer-automatic-download/)
     - Default Editor: [Install Notepad++](https://notepad-plus-plus.org/)
-        - Instructions: [Set NotePad++ as Default](https://npp-user-manual.org/docs/other-resources/#notepad-replacement)
     - Archive manager: [7-Zip](https://www.7-zip.org/)
     - Faster File Search: [Everything](https://www.voidtools.com/)
     - Printer Drivers: [Brother Printer](https://www.brother-usa.com/home/printers-fax)
