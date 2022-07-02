@@ -6,6 +6,7 @@
     - Darksouls 1 and remaster saves are all stored in Documents, which is now backed up in One Drive, so not as concerned.
     - Particularly: Magicite, Darksouls 2+3, Warcraft3, Warcraft2, StarCraft, or any other game/config that doesn't save to the Cloud or connected NAS.
 	    - If you mod skyrim using Nexus Mod Manager, backup the program folder where this data is stored.
+	    - Beatsaber custom levels and data
     - If you don't have a full backup of users, make sure to at least grab config data from AppData for programs with a more involved setup (i.e. Anki)
 	    - At the very least, save Anki data + addons.
 2. Make note of any programs that have been added/removed from this list since the last time you performed a fresh install.
@@ -17,11 +18,12 @@
 2. Perform a benchmark test using Windows built in Performance Monitor.
     1. Press the *Windows Key + R* and type "perfom /report"
     2. Save this report for future reference
+3. Perform a benchmark test using [NovaBench](https://novabench.com/files/novabench.msi).
 3. Map network drives to access any backup data (if backing up to a NAS).
 4. Now download and install windows environment improvements/Utilities:
 
     - Web Browser: [FireFox](https://www.mozilla.org/en-US/firefox/download/thanks/)
-	- Password Manager: [Myki](https://myki.com/download)
+	- Password Manager: [KeyPassXC](https://keepassxc.org/download/#windows)
     - VPN: [Mullvad](https://mullvad.net/en/download/)
 	- Graphic drivers: [Geforce Experience](https://www.nvidia.com/en-us/geforce/geforce-experience/)
     - Remote Desktop: [Teamviewer](https://www.teamviewer.com/en/teamviewer-automatic-download/)
@@ -87,6 +89,39 @@
 - Linux Terminal:
     - Setup [Windows Subsystem for Linux (wsl)](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 	- or, get [MobaXterm](https://mobaxterm.mobatek.net/download.html) home edition.
+
+## All Programs
+- Adobe Acrobat Reader - probably don't need anymore, can open pdf in browsers
+- Adobe Flash player - flash has been discontinued
+- [Anki](https://apps.ankiweb.net/)
+- [Audacity](https://www.audacityteam.org/)
+- Brother Utilities
+- [FireFox](https://www.mozilla.org/en-US/firefox/download/thanks/)
+- [Deluge](https://ftp-osl.osuosl.org/pub/deluge/windows/)
+- [Discord](https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x86)
+- DTS:X Ultra - audio driver
+- [EarMaster 7](https://www.earmaster.com/downloads/free-versions.html)
+- [Everything](https://www.voidtools.com/)
+- ext3fsd - use to mount ext2/3/4 filesystem on windows
+- FileBot - download from microsoft store
+- [Git Bash](https://git-scm.com/download/win)
+- [Honeyview](https://www.bandisoft.com/honeyview/dl.php?web)
+- [KeyPassXC](https://keepassxc.org/download/#windows)
+- [Logitech G HUB (mouse software)](https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exe)
+- [mp3tag](https://www.mp3tag.de/en/dodownload64.html)
+- [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)
+- [Mullvad](https://mullvad.net/download/app/exe/latest/)
+- [musicbrainz picard](https://picard.musicbrainz.org/)
+- [notepad++](https://notepad-plus-plus.org/downloads/)
+- [NovaBench](https://novabench.com/files/novabench.msi)
+- [NZXT CAM](https://nzxt-app.nzxt.com/NZXT-CAM-Setup.exe)
+- [OBS Studio](https://obsproject.com/)
+- [Office](https://www.microsoft.com/en-us/microsoft-365/p/microsoft-365-family/cfq7ttc0k5dm?icid=mscom_marcom_dlc&activetab=pivot:overviewtab)
+- [Plex](https://www.plex.tv/media-server-downloads/#plex-app)
+- [Team Viewer](https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe)
+- [TreeSize Free](https://customers.jam-software.de/downloadTrial.php?language=EN&article_no=80&ca=1)
+- [VLC media player](https://www.videolan.org/vlc/)
+- [Visual Studio](https://visualstudio.microsoft.com/)
 
 ## After Installing and configuring programs
 
