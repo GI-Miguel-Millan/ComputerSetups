@@ -38,8 +38,6 @@ $dst = [System.IO.Path]::Combine($pwd, "tmp")
 mkdir $dst
 
 # Loop through each item in the json and install it if necessary.
-[System.Collections.ArrayList]$urlsToDownload = @()
-[System.Collections.ArrayList]$destinations = @()
 foreach ($item in $AllInstallersJSON)
 {
 	$name = $item.Name
@@ -49,34 +47,28 @@ foreach ($item in $AllInstallersJSON)
 	if (!$url){ echo "Warning: URL not provided for $url" }
 
 	$shouldInstall = ($item.Install) -and ($name) -and ($url)
-	$tag = if ($shouldInstall) {"Installing"} else { "Skipping" }
+	$tag = if ($shouldInstall) {"Begin download for"} else { "Skipping" }
 
-	echo "$tag $name at $url `n"
+	echo "$tag $name ($url) `n"
 	
-	if (!$shouldInstall) 
-	{ 
-		continue 
+	if (!$shouldInstall) { continue }
+
+	$args = $item.Arguments
+	if ($args)
+	{
+		echo "Args to use: $args"
 	}
+
 	# Get the name of the file being downloaded from the last element of the url
 	$fileName = $url.Split('/') | Select-Object -Last 1 
 	$dstPath = [System.IO.Path]::Combine($dst, $fileName)
 
-	$urlsToDownload.Add($url)
-	$destinations.Add($dstPath)
+	Start-BitsTransfer -Source $url -Destination $dstPath
+	
+	echo "$name downloaded to $dstPath `n"
+	
+	Start-Process $dstPath -wait -ArgumentList $args
 }
-
-echo "Sources to Download from `n"
-echo $urlsToDownload
-
-echo "`n"
-echo "Destinations To Download To `n"
-echo $destinations
-echo "`n"
-
-Start-BitsTransfer -Source $urlsToDownload -Destination $destinations
-
-$files = [System.IO.Directory]::GetFiles($dst)
-foreach ($file in $files) { Start-Process $file -wait }
 
 if ($DeleteInstallerFiles)
 {
