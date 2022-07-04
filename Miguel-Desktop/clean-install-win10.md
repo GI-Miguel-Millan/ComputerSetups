@@ -10,7 +10,7 @@
     - If you don't have a full backup of users, make sure to at least grab config data from AppData for programs with a more involved setup (i.e. Anki)
 	    - At the very least, save Anki data + addons.
 2. Make note of any programs that have been added/removed from this list since the last time you performed a fresh install.
-3. Create a Windows installer: [detailed Instructions](https://www.microsoft.com/en-us/software-download/windows10?d2784474-fdb0-4e9d-9e47-5e88c0e053ec=True)
+3. Create a Windows installer: [detailed Instructions](https://www.microsoft.com/en-us/software-download/windows11)
  
 ## Important / Immediately after Install
 
