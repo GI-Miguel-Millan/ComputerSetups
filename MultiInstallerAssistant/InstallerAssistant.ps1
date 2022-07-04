@@ -57,6 +57,16 @@ foreach ($item in $AllInstallersJSON)
 		continue 
 	}
 
+	# If the path starts with a winget command, use the windows package manager to download and install the software.
+	$isWingetPackage = $path.StartsWith("winget")
+	if ($isWingetPackage)
+	{
+		echo "Using winget package manager `n"
+		if ($DownloadOnly) { $path = $path.Replace("install", "search") }
+		Invoke-Expression $path
+		continue
+	}
+
 	# Get the name of the file being downloaded from the last element of the path
 	$fileName = $path.Split('/') | Select-Object -Last 1 
 
@@ -113,8 +123,7 @@ foreach ($item in $AllInstallersJSON)
 			$installerpath = $locatedExecutables | Select-Object -First 1
 		}else
 		{
-			# Could not locate any executables within the extracted zip file.
-			echo "No executable file to install from!"
+			echo "Could not locate any executables within the extracted zip file! `n"
 			exit 4
 		}
 	}
