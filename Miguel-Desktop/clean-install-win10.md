@@ -10,7 +10,7 @@
     - If you don't have a full backup of users, make sure to at least grab config data from AppData for programs with a more involved setup (i.e. Anki)
 	    - At the very least, save Anki data + addons.
 2. Make note of any programs that have been added/removed from this list since the last time you performed a fresh install.
-3. Create a Windows installer: [detailed Instructions](https://www.microsoft.com/en-us/software-download/windows10?d2784474-fdb0-4e9d-9e47-5e88c0e053ec=True)
+3. Create a Windows installer: [detailed Instructions](https://www.microsoft.com/en-us/software-download/windows11)
  
 ## Important / Immediately after Install
 
@@ -22,7 +22,7 @@
 3. Map network drives to access any backup data (if backing up to a NAS).
 4. Now download and install windows environment improvements/Utilities:
 
-    - Web Browser: [FireFox](https://www.mozilla.org/en-US/firefox/download/thanks/)
+    - Web Browser: [FireFox]('https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US')
 	- Password Manager: [KeyPassXC](https://keepassxc.org/download/#windows)
     - VPN: [Mullvad](https://mullvad.net/en/download/)
 	- Graphic drivers: [Geforce Experience](https://www.nvidia.com/en-us/geforce/geforce-experience/)
@@ -95,8 +95,9 @@
 - Adobe Flash player - flash has been discontinued
 - [Anki](https://apps.ankiweb.net/)
 - [Audacity](https://www.audacityteam.org/)
+- [Battle.Net](https://www.blizzard.com/download/confirmation?product=bnetdesk)
 - Brother Utilities
-- [FireFox](https://www.mozilla.org/en-US/firefox/download/thanks/)
+- [FireFox](https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US)
 - [Deluge](https://ftp-osl.osuosl.org/pub/deluge/windows/)
 - [Discord](https://discord.com/api/downloads/distributions/app/installers/latest?channel=stable&platform=win&arch=x86)
 - DTS:X Ultra - audio driver
@@ -106,7 +107,7 @@
 - FileBot - download from microsoft store
 - [Git Bash](https://git-scm.com/download/win)
 - [Honeyview](https://www.bandisoft.com/honeyview/dl.php?web)
-- [KeyPassXC](https://keepassxc.org/download/#windows)
+- [KeePassXC](https://keepassxc.org/download/#windows)
 - [Logitech G HUB (mouse software)](https://download01.logi.com/web/ftp/pub/techsupport/gaming/lghub_installer.exe)
 - [mp3tag](https://www.mp3tag.de/en/dodownload64.html)
 - [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)
@@ -118,6 +119,7 @@
 - [OBS Studio](https://obsproject.com/)
 - [Office](https://www.microsoft.com/en-us/microsoft-365/p/microsoft-365-family/cfq7ttc0k5dm?icid=mscom_marcom_dlc&activetab=pivot:overviewtab)
 - [Plex](https://www.plex.tv/media-server-downloads/#plex-app)
+- [Steam](https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe)
 - [Team Viewer](https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe)
 - [TreeSize Free](https://customers.jam-software.de/downloadTrial.php?language=EN&article_no=80&ca=1)
 - [VLC media player](https://www.videolan.org/vlc/)
