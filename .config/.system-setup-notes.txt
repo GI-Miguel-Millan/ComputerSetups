@@ -1,0 +1,139 @@
+This file will contain a quick summary of various commands and steps that I've taken
+to configure my desktop environment after installing EndeavourOS.
+
+Installing EndeavourOS:
+- Created a live boot of EndeavourOS. 
+- When trying to boot into the NVidia driver version, the display manager had issues so I had to use the default entry in the bootloader.
+- As such, I didn't have NVidia drivers after install, so this is something that will need to be added.
+
+Updates and New Notification Manager:
+- Updated Arch and Endeavour repo lists using the GUI buttons provided on the Welcome Screen.
+- Configured the Update and News Notifier from the GUI so that I will be alerted for new updates and Arch news.
+
+Configuring the display manager (lightdm):
+- The default layout of the monitors was (DP1 - HDMI - DP5) when it needed to be (DP5 - DP1 - HDMI)
+- Used the 'arandr' command to graphically position my monitors in the correct order.
+- Used the 'Save As' menu item to save the 'xrandr' command to an .sh file located at ~/.screenlayout/arandr-config.sh
+- Copied the contents of this script (the full xrandr command with all the required parameters
+) and added it to the /etc/lightdm/lightdm.conf file like so:
+     
+     display-setup-script=xrandr --output DP-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1 --off --output HDMI-0 --mode 3840x2160 --pos 3840x0 --rotate normal --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --mode 1920x1080 --pos 0x0 --rotate normal
+
+Install Neovim:
+- Install Neovim and xclip (to support shared clipboard between instances):    
+    sudo pacman -Syu neovim xclip
+- Edit : ~/.config/nvim/init.vim and add the following:
+
+set clipboard=unnamedplus         " use system clipboard for yanking/pasting
+set ignorecase                    " Case insensitive searching
+set hlsearch                      " Highlight search results
+set incsearch                     " enable incremental searching
+set showmatch                     " Show matching parenthesis
+set mouse=v                       " Middle-click will paste clipboard
+set mouse=a                       " Enable mouse clicking
+set tabstop=4                     " Sets the number of columns occupied by a tab
+set softtabstop=4                 " Sees multiple spaces as tabstops so that backspace works as expected
+set expandtab                     " Converts tabs to white space
+set shiftwidth=4                  " width for autoindents
+set autoindent                    " indent a new line the same amount as the line just typed 
+set number                        " add line numbers                                     
+set wildmode=longest,list         " tab completion for vim commands                      
+set cc=80                         " set an 80 column border                              
+filetype plugin indent on         " Detects filetype -> attempts to load appropriate plugin for syntax highlighting for that filetype -> attempts to load appropriate indent file for that filetype.                                                                     
+syntax on                         " Enables syntax highlighting.                         
+set cursorline                    " Underlines the line your cursor is on.               
+set ttyfast                       " Speed up scrolling in vim  
+
+Install Timeshift and Create a restore point:
+    yay -Syu timeshift
+- Note: you have to run the launcher to use Timeshift's GUI:
+    timeshift-launcher
+
+Install nvidia drivers:
+    nvidia-inst --prime --conf
+
+Configuring /etc/fstab to mount additional drives permanently:
+- Create mount points (must use sudo):
+    sudo mkdir -p /media/persistent/backup /media/persistent/data /media/persistent/steam /media/nfs/media-server
+- Display available mountable devices, their filesystem type, label and uuid:
+    lsblk --fs
+- Note: if you're coming from windows and used fast booting attempting to mount 
+        the ntfs file systems will most likely error out and only allow you to
+        mount in read only mode. In this case you can use ntfsfix <dev> to 
+        clear out caches. However, be warned this may result in issues mounting
+        the drive in windows later. As such, if you are dual booting it would 
+        be better to boot windows instead, shutdown fully, and disable fast boot.
+- Note2: I ran into issues with being unable to delete windows recovery files 
+        even using sudo rm -rf... as such I decided to move desired files to a 
+        separate drive and I'm going to just reformat my backup drives.
+- Used fdisk /dev/sdb1 to create a new linux partition on the ntfs ssd.
+- Then I use mkfs.btrfs -L data /dev/sdb1 to create a btrfs file system on the 
+  the drive with the label of 'data'
+- Note3: made the mistake of copying data to the file system before fully 
+         understanding how subvolumes work... now I'm stuck waiting for files to
+         copy to a flash drive so that I can clear the drive and reformat it with
+         the desired subvolume hierachy. Make sure to create a blank subvolume 
+         immediately after creating a btrfs file system on a partition.
+- Once again reformatted the ssd, then I made sure to create a subvolume:
+    sudo mount /dev/sdb1 /media/persistent/data 
+    sudo btrfs subvolume create /media/persistent/data/data
+- Now we list out the subvolumes and make note of the subvolume id 
+    sudo btrfs subvolume list /media/persistent/data 
+    - here subvolume id is 256, which is typically the first subvolume id.
+    - Note: you can verify the subvolume by mounting it with (unmount first)
+        sudo mount /dev/sdb1 /media/persistent/data -o subvolid=256,defaults
+- Finally, here's the fstab entry for the ssd:
+    UUID=d914e3ae-4691-4447-a0f1-41bec9f72d37 /media/persistent/data btrfs subvolid=256,defaults,noatime,compress=zstd 0 0
+- In a similar fashion, I formatted the internal hdd to a new btrfs file system 
+and set it up in the fstab with following info:
+    UUID=5c47b54c-a915-4490-a35a-78041addd81a /media/persistent/backup btrfs subvolid=256,defaults,noatime,compress=zstd 0 0
+- Next, we'll mount the external steam drive:
+    UUID=16DE-3CF2 				  /media/persistent/steam exfat defaults,nofail 0 0
+- Lastly, we'll mount the nfs (network file share) provided by our media server:
+    192.168.1.108:/media_server /media/nfs/media-server nfs defaults 0 0
+    Note: you need nfs-utils installed, (comes with EndeavourOS already).
+
+** Important ** 
+- you won't be able to write to these mounted drives with default permissions.
+- Because this is my personal PC, I'm just going to give full access like so:
+    sudo chmod 777 /media/persistent/data/
+    sudo chmod 777 /media/persistent/backup/
+    sudo chmod 777 /media/persistent/steam/
+    sudo chmod 777 /media/nfs/media-server/
+- Now I (and the programs I use) can write to these locations and create folders.
+    
+Install OneDrive (for now...):
+    yay -Syu onedrive-abraunegg onedrivegui-git
+- Note: I really don't want the bloat of OneDrive... however I currently need
+it to sync my keypass database file between devices.
+- Lets make some sybollic links for quick access from home:
+    
+Install keepassXC and open the database file OneDrive:
+    sudo pacman -Syu keepassxc
+
+Install Plex Desktop:
+    yay -Syu plex-desktop
+- You'll need to sign to plex.tv -> use entry in password manager (we used email).
+
+Create symbolic links to folder in OneDrive using the following commands:
+ln -s onedrive/<folder>/ <folder in home>
+
+Install Virtual Box:
+    pacman -Syu virtualbox
+- Note: you will be asked to pick a host module. Choose virtualbox-host-modules-arch
+        for the standard linux kernal, choose virtualbox-host-dkms for any other 
+        kernel (including linux-lts, which is what I prefer to run).
+- Add users to 'vboxusers' group to allow passthrough of usb devices
+    usermod -aG vboxusers miguel
+- Get the guest additions disc 
+    pacman -Syu virtualbox-guest-iso
+
+NOTE: You cannot use virtual box for steam games... windows 11 just crashes ><
+
+Install Steam in Linux: https://wiki.archlinux.org/title/Steam
+- enable multilib: https://wiki.archlinux.org/title/Official_repositories#multilib
+  by uncommenting the [multilib] section of /etc/pacman.conf
+- Get english and japanese locals by uncommenting the appropriate local from
+  /etc/locale.gen
+
+
