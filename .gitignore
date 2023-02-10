@@ -4,3 +4,6 @@
 .cache
 .bash_history
 .gitconfig
+tmp
+downloads
+desktop
