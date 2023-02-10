@@ -1,0 +1,6 @@
+*.pyc
+.Xauthority
+.Xresources
+.cache
+.bash_history
+.gitconfig
