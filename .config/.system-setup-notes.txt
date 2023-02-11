@@ -111,6 +111,26 @@ it to sync my keypass database file between devices.
 Install keepassXC and open the database file OneDrive:
     sudo pacman -Syu keepassxc
 
+Prepare Backup Solution:
+- First, we'll create a git repo and add to it user configuration files, in 
+         particular: .gitignore, .bashrc, .config/nvim/ .config/qtile/, 
+         .config/rofi/ and .config/.system-setup-notes.txt (this file).
+         
+        git init
+        config --global user.email "miggy221@gmail.com"
+        config --global user.name "Miguel Millan"
+        git add <files>
+        git commit -m "<message>"
+
+- Next, we'll need to configure the git credential manager and then push to the 
+        the remote (https://github.com/mjmillan/ComputerSettups, the linux branch)
+        
+        git config --global credential.helper 'store --file ~/.my-credentials'
+        git remote add origin https://github.com/mjmillan/ComputerSetups
+        git checkout -b 'linux'
+        git push --set-upstream origin linux
+        <enter credentials>
+
 Install Plex Desktop:
     yay -Syu plex-desktop
 - You'll need to sign to plex.tv -> use entry in password manager (we used email).
