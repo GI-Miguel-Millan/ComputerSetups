@@ -165,4 +165,17 @@ Install Steam in Linux: https://wiki.archlinux.org/title/Steam
 - Get english and japanese locals by uncommenting the appropriate local from
   /etc/locale.gen
 
+Followed this guide to create a multi-boot disk:
+    https://forum.garudalinux.org/t/how-to-easily-create-a-bootable-usb-to-install-garuda/2959
+    Notes:
+    - Needed to use fdisk to completely wipe the usb (each partition, then create
+      a new g partition)
+    - Then create (boot partition [1MB], EFI System Partition [50MB], 
+      Linux File System [remaining])
+    - now, use gparted to create the hybrid partition: https://wiki.archlinux.org/title/Multiboot_USB_drive#Hybrid_UEFI_GPT_.2B_BIOS_GPT.2FMBR_boot
+    - The last option (additional fallback section) may not work, hopefully we don't need it.
+    - Going back to the original article, setup the multi-boot usb using downloaded package.
+    - Now create the garuda.d folder and generic.cfg entry under /mnt/boot/grub/mbusb.d/
+      so that garuda can be a part of the multibootable iso's
+
 
