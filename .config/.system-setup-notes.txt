@@ -131,6 +131,15 @@ Prepare Backup Solution:
         git push --set-upstream origin linux
         <enter credentials>
 
+- Now, create rdiff-backup script to handle backing up the home and important 
+    directories to the backup drive.
+
+    pacman -Syu rdiff-backup
+    rdiff-backup --verbosity 6 --include-globbing-filelist /home/miguel/scripts/backup-include-exclude-list.txt / /media/persistent/backup/eos-qtile
+
+  Directories of interest:
+    - /etc, /home, /root, /var, /usr/local/bin, /usr/local/sbin, /srv, /opt
+
 Install Plex Desktop:
     yay -Syu plex-desktop
 - You'll need to sign to plex.tv -> use entry in password manager (we used email).
