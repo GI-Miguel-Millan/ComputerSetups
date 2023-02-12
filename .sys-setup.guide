@@ -93,6 +93,7 @@ For KDE, auto starting was as simple as
     ln -s onedrive/music/ music
     ln -s onedrive/pictures/ pictures
     ln -s onedrive/videos/ videos
+    ln -s onedrive/scripts/ scripts
 
 Install keepassXC and open the database file OneDrive:
     sudo pacman -Syu keepassxc
@@ -113,8 +114,8 @@ Prepare Backup Solution:
         
         git config --global credential.helper 'store --file ~/.my-credentials'
         git remote add origin https://github.com/mjmillan/ComputerSetups
-        git checkout -b 'linux'
-        git push --set-upstream origin linux
+        git checkout -b 'garuda-linux'
+        git push --set-upstream origin garuda-linux
         <enter credentials>
 
 - Now, create rdiff-backup script to handle backing up the home and important 
