@@ -1,0 +1,11 @@
+.Xauthority
+.bash_logout
+.bash_profile
+.cache/
+.firedragon/
+.gitconfig
+.local/
+.mozilla/
+.my-credentials
+.pki/
+Desktop/

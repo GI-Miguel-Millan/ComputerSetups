@@ -1,0 +1,168 @@
+This file will contain a quick summary of various commands and steps that I've taken
+to configure my desktop environment after installing Garuda.
+
+Installing Garuda:
+- Attempted to create a multi-boot usb to try out different versions.
+- This didn't work out too well, so I ended up just making a simple boot drive 
+  using the dd command.
+- Surprisingly, the nvidia driver version of the live disk worked and I was able 
+  to install this version. However, when I tried to boot into the system after 
+  the install it would freeze on the boot screen and never get to login...
+- As such, I had to reinstall, this time using the non-nvidia driver version of 
+  the live boot disk. Now I could finally get into the system and log in.
+- Note: I was able to very easily install garuda alongside EndeavourOS, so I can
+  fall back if necessary... though I don't think that will be happening.
+
+Go Through Garuda Assistant:
+- This distro is very simple to get up and running...Using their assistant, you
+  can very easily get most programs you'd want/need installed via a series of 
+  prompts.
+- Off the top of my head:
+  firefox, libreOffice, thunderbird, gimp, japanese and asian language packs, 
+  steam, lutris, wine and proton packages, discord, and I'm sure there were more.
+
+Install Neovim:
+- Install Neovim and xclip (to support shared clipboard between instances):    
+    sudo pacman -Syu neovim xclip
+- Note: for Garuda, xclip is not installed, but I still have a shared clipboard.
+- Edit : ~/.config/nvim/init.vim and add the following:
+
+set clipboard=unnamedplus         " use system clipboard for yanking/pasting
+set ignorecase                    " Case insensitive searching
+set hlsearch                      " Highlight search results
+set incsearch                     " enable incremental searching
+set showmatch                     " Show matching parenthesis
+set mouse=v                       " Middle-click will paste clipboard
+set mouse=a                       " Enable mouse clicking
+set tabstop=4                     " Sets the number of columns occupied by a tab
+set softtabstop=4                 " Sees multiple spaces as tabstops so that backspace works as expected
+set expandtab                     " Converts tabs to white space
+set shiftwidth=4                  " width for autoindents
+set autoindent                    " indent a new line the same amount as the line just typed 
+set number                        " add line numbers                                     
+set wildmode=longest,list         " tab completion for vim commands                      
+set cc=80                         " set an 80 column border                              
+filetype plugin indent on         " Detects filetype -> attempts to load appropriate plugin for syntax highlighting for that filetype -> attempts to load appropriate indent file for that filetype.                                                                     
+syntax on                         " Enables syntax highlighting.                         
+set cursorline                    " Underlines the line your cursor is on.               
+set ttyfast                       " Speed up scrolling in vim  
+
+No need to worry about setting up timeshift, Garuda comes with Snapper and it
+is already configured to take snapshots of your system every time you update.
+
+No need to worry about NVidia drivers, these were already taken care of by the
+Garuda Assistant.
+
+Configuring /etc/fstab to mount additional drives permanently:
+- Create mount points (must use sudo):
+    sudo mkdir -p /media/backup /media/data /media/steam /media/media-server
+- Give directories permissions to allow user/programs to read/write:
+    sudo chmod -R a+rw /media
+- Thankfully, this time around I'm coming from my EndeavourOS install, so no issues
+  with drives. I was able to pretty much just copy with minor path alterations:
+
+    # Internal Hard Drives
+    UUID=d914e3ae-4691-4447-a0f1-41bec9f72d37 /media/data btrfs subvolid=256,defaults,noatime,compress=zstd 0 0
+
+    UUID=5c47b54c-a915-4490-a35a-78041addd81a /media/backup btrfs subvolid=256,defaults,noatime,compress=zstd 0 0
+
+    # Network File Shares
+    192.168.1.108:/media_server           /media/media-server nfs defaults,nofail 0 0
+
+- Note I'm waiting to add the Steam drive for now, plan is to reformat it after backing up saves.
+
+Install OneDrive (for now...):
+    yay -Syu onedrive-abraunegg onedrivegui-git
+- Note: I really don't want the bloat of OneDrive... however I currently need
+it to sync my keypass database file between devices.
+- After creating profile, signing in with microsoft account, and syncing (this
+didn't take too long since I already had OneDrive mostly up to date on my Data
+drive), I setup OneDriveGUI to sync on start and made it start with the system.
+
+For KDE, auto starting was as simple as 
+
+    System Settings > Startup and Shutdown > Autostart > Add... 
+
+- Lets make some sybollic links for quick access from home:
+    ln -s /media/data/onedrive/ onedrive
+    ln -s /media/data/ data
+    ln -s /media/steam/ steam-drive
+    ln -s /media/backup/ backup
+    ln -s /media/media-server/ media-server
+    ln -s onedrive/documents-personal/ documents
+    ln -s onedrive/music/ music
+    ln -s onedrive/pictures/ pictures
+    ln -s onedrive/videos/ videos
+
+Install keepassXC and open the database file OneDrive:
+    sudo pacman -Syu keepassxc
+
+Prepare Backup Solution:
+- First, we'll create a git repo and add to it user configuration files, in 
+         particular: .gitignore, .bashrc, .config/nvim/ .config/qtile/, 
+         .config/rofi/ and .config/.system-setup-notes.txt (this file).
+         
+        git init
+        config --global user.email "miggy221@gmail.com"
+        config --global user.name "Miguel Millan"
+        git add <files>
+        git commit -m "<message>"
+
+- Next, we'll need to configure the git credential manager and then push to the 
+        the remote (https://github.com/mjmillan/ComputerSettups, the linux branch)
+        
+        git config --global credential.helper 'store --file ~/.my-credentials'
+        git remote add origin https://github.com/mjmillan/ComputerSetups
+        git checkout -b 'linux'
+        git push --set-upstream origin linux
+        <enter credentials>
+
+- Now, create rdiff-backup script to handle backing up the home and important 
+    directories to the backup drive.
+
+    pacman -Syu rdiff-backup
+    rdiff-backup --verbosity 6 --include-globbing-filelist /home/miguel/scripts/backup-include-exclude-list.txt / /media/persistent/backup/eos-qtile
+
+  Directories of interest:
+    - /etc, /home, /root, /var, /usr/local/bin, /usr/local/sbin, /srv, /opt
+
+Install Plex Desktop:
+    yay -Syu plex-desktop
+- You'll need to sign to plex.tv -> use entry in password manager (we used email).
+
+Create symbolic links to folder in OneDrive using the following commands:
+ln -s onedrive/<folder>/ <folder in home>
+
+Install Virtual Box:
+    pacman -Syu virtualbox
+- Note: you will be asked to pick a host module. Choose virtualbox-host-modules-arch
+        for the standard linux kernal, choose virtualbox-host-dkms for any other 
+        kernel (including linux-lts, which is what I prefer to run).
+- Add users to 'vboxusers' group to allow passthrough of usb devices
+    usermod -aG vboxusers miguel
+- Get the guest additions disc 
+    pacman -Syu virtualbox-guest-iso
+
+NOTE: You cannot use virtual box for steam games... windows 11 just crashes ><
+
+Install Steam in Linux: https://wiki.archlinux.org/title/Steam
+- enable multilib: https://wiki.archlinux.org/title/Official_repositories#multilib
+  by uncommenting the [multilib] section of /etc/pacman.conf
+- Get english and japanese locals by uncommenting the appropriate local from
+  /etc/locale.gen
+
+Followed this guide to create a multi-boot disk:
+    https://forum.garudalinux.org/t/how-to-easily-create-a-bootable-usb-to-install-garuda/2959
+    Notes:
+    - Needed to use fdisk to completely wipe the usb (each partition, then create
+      a new g partition)
+    - Then create (boot partition [1MB], EFI System Partition [50MB], 
+      Linux File System [remaining])
+    - now, use gparted to create the hybrid partition: https://wiki.archlinux.org/title/Multiboot_USB_drive#Hybrid_UEFI_GPT_.2B_BIOS_GPT.2FMBR_boot
+    - The last option (additional fallback section) may not work, hopefully we don't need it.
+    - Going back to the original article, setup the multi-boot usb using downloaded package.
+    - Now create the garuda.d folder and generic.cfg entry under /mnt/boot/grub/mbusb.d/
+      so that garuda can be a part of the multibootable iso's
+
+
+
