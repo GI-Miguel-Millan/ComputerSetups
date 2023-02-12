@@ -69,7 +69,8 @@ Configuring /etc/fstab to mount additional drives permanently:
     # Network File Shares
     192.168.1.108:/media_server           /media/media-server nfs defaults,nofail 0 0
 
-- Note I'm waiting to add the Steam drive for now, plan is to reformat it after backing up saves.
+    # Mount Steam Drive
+    UUID=5fff4b22-032b-4211-a517-7ae5f18ea171 /media/steam/ ext4 defaults,nofail 0 0
 
 Install OneDrive (for now...):
     yay -Syu onedrive-abraunegg onedrivegui-git
@@ -133,5 +134,8 @@ Install Plex Desktop:
 
 Create symbolic links to folder in OneDrive using the following commands:
 ln -s onedrive/<folder>/ <folder in home>
+
+After saving any potential save data stored in the directory of steam games, I
+wiped the drive and reformatted it using fdisk and mkfs.ext4
 
 

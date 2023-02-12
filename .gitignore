@@ -9,3 +9,6 @@
 .my-credentials
 .pki/
 Desktop/
+.steam/
+.steampath
+.steampid
