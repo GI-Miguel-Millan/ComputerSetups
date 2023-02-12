@@ -122,10 +122,10 @@ Prepare Backup Solution:
     directories to the backup drive.
 
     pacman -Syu rdiff-backup
-    rdiff-backup --verbosity 6 --include-globbing-filelist /home/miguel/scripts/backup-include-exclude-list.txt / /media/persistent/backup/eos-qtile
+    rdiff-backup --verbosity 6 --include-globbing-filelist /home/miguel/scripts/backup-include-exclude-list.txt / /media/backup/garuda
 
   Directories of interest:
-    - /etc, /home, /root, /var, /usr/local/bin, /usr/local/sbin, /srv, /opt
+    - /etc, /home, /root, /var, /srv, /opt (exclude discord)
 
 Install Plex Desktop:
     yay -Syu plex-desktop
@@ -133,37 +133,5 @@ Install Plex Desktop:
 
 Create symbolic links to folder in OneDrive using the following commands:
 ln -s onedrive/<folder>/ <folder in home>
-
-Install Virtual Box:
-    pacman -Syu virtualbox
-- Note: you will be asked to pick a host module. Choose virtualbox-host-modules-arch
-        for the standard linux kernal, choose virtualbox-host-dkms for any other 
-        kernel (including linux-lts, which is what I prefer to run).
-- Add users to 'vboxusers' group to allow passthrough of usb devices
-    usermod -aG vboxusers miguel
-- Get the guest additions disc 
-    pacman -Syu virtualbox-guest-iso
-
-NOTE: You cannot use virtual box for steam games... windows 11 just crashes ><
-
-Install Steam in Linux: https://wiki.archlinux.org/title/Steam
-- enable multilib: https://wiki.archlinux.org/title/Official_repositories#multilib
-  by uncommenting the [multilib] section of /etc/pacman.conf
-- Get english and japanese locals by uncommenting the appropriate local from
-  /etc/locale.gen
-
-Followed this guide to create a multi-boot disk:
-    https://forum.garudalinux.org/t/how-to-easily-create-a-bootable-usb-to-install-garuda/2959
-    Notes:
-    - Needed to use fdisk to completely wipe the usb (each partition, then create
-      a new g partition)
-    - Then create (boot partition [1MB], EFI System Partition [50MB], 
-      Linux File System [remaining])
-    - now, use gparted to create the hybrid partition: https://wiki.archlinux.org/title/Multiboot_USB_drive#Hybrid_UEFI_GPT_.2B_BIOS_GPT.2FMBR_boot
-    - The last option (additional fallback section) may not work, hopefully we don't need it.
-    - Going back to the original article, setup the multi-boot usb using downloaded package.
-    - Now create the garuda.d folder and generic.cfg entry under /mnt/boot/grub/mbusb.d/
-      so that garuda can be a part of the multibootable iso's
-
 
 
