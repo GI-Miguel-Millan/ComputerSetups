@@ -138,4 +138,23 @@ ln -s onedrive/<folder>/ <folder in home>
 After saving any potential save data stored in the directory of steam games, I
 wiped the drive and reformatted it using fdisk and mkfs.ext4
 
+Install improved japanese keyboard (Mozc with additional dictionaries):
+yay -Syu fcitx5-mozc-ut
+
+Add Japanese keyboard:
+Settings > language/region settings > Input Method > Add method > Mozc
+
+Change system language to japanese:
+Settings > language/region settings > region and Language settings 
+> Modify Language > Add additional language > 日本語 > set as higher priority.
+
+Add Japanese Fonts:
+yay -Syu noto-fonts-cjk
+
+Update KDE fonts to use Japanese fonts:
+Settings > Appearance > Fonts
+Sets fonts to any of the following: IPAGothic, IPAMincho, IPAPGothic, IPAPMincho
+
+Fix Fonts in Browser and Anki and any other applications that may be using 
+chinese fonts by default.
 
